@@ -1,0 +1,51 @@
+## Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+## Kotlin / Java
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+
+## Android
+local.properties
+captures/
+.externalNativeBuild
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.dex
+release/
+
+## IntelliJ / Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+## macOS / Windows
+.DS_Store
+Thumbs.db
+
+## Signing / credentials — never commit
+*.keystore
+*.jks
+keystore.properties
+signing.properties
+.env
+.env.*
+!.env.example
+
+## Publishing
+~/.gradle/gradle.properties
