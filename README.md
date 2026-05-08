@@ -53,6 +53,8 @@ s3://your-bucket/polylex/
 }
 ```
 
+The full manifest contract is formalized as a JSON Schema at [`manifest.schema.json`](manifest.schema.json) (draft 2020-12). Manifests written by the [Polylex GitHub Action](https://github.com/Polylex/polylex-action) include a `$schema` self-reference, so editors like VSCode and JetBrains auto-validate them when you open one.
+
 The SDK fetches the manifest first, compares `version` to what it has cached, and skips the bundle download entirely when they match. This means a short-TTL manifest (~60s) and a long-TTL (days/weeks) bundle cache — fast, cheap, CDN-friendly.
 
 Don't want timestamped versioning? Write a manifest with a fixed `version` (e.g., `"static"`) and a fixed `translations_base_url`. The SDK doesn't care — the contract is all that matters.
