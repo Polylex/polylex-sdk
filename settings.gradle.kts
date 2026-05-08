@@ -17,3 +17,4 @@ dependencyResolutionManagement {
 rootProject.name = "polylex-sdk"
 
 include(":sdk")
+include(":sample")

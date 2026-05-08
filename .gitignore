@@ -6,6 +6,7 @@ build/
 !**/src/test/**/build/
 
 ## Kotlin / Java
+.kotlin/
 *.class
 *.jar
 *.war

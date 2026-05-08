@@ -7,32 +7,41 @@ This roadmap reflects the current plan. Items may shift as real users report wha
 - `Polylex.initialize(config, context)` public API
 - `PolylexContextWrapper` + `PolylexResources` for zero-migration `getString()` override
 - 3-tier cache: in-memory → on-disk JSON → CDN fetch
+- Manifest-first fetch flow with version short-circuit
 - Locale normalization (Android `zh-CN`/`in`/`nb-NO` → Polylex canonical `zh-cn`/`id`/`no`)
 - Exponential-backoff retry (3 attempts, 1s → 5s) with graceful fallback to bundled strings
 - Session-consistent fallback rule: in-memory cache only flips on cold start or explicit commit
 - Maven Central publishing as `dev.polylex:polylex-android:0.1.0`
 
-## v0.2 — iOS SDK via KMM
+## v0.2 — polylex-action + end-to-end demo
+
+The GitHub Action that makes the "merge a PR → strings ship" story real.
+
+- `polylex-action` repo, separate from the SDK
+- `polylex/extract` — parses `strings.xml` + iOS `.strings` files, emits a delta JSON of new/changed keys
+- `polylex/translate` — pluggable provider interface; Google Cloud Translation v3 as the default implementation
+- `polylex/deploy` — uploads to an S3-compatible bucket and rewrites the manifest with a new version
+- Placeholder masking (`%1$s`, `%@`, `{var}`, HTML tags) so translation services don't corrupt format specifiers
+- RTL locale handling with bidi control characters around placeholders
+- Manifest JSON schema published (`manifest.schema.json`) for hand-authoring / IDE validation
+- Rollback via `workflow_dispatch` (manifest-rewrite to a previous version)
+- Reference sample app (Jetpack Compose) pointed at a live demo bucket
+- Demo GIF at the top of this README
+
+## v0.3 — iOS SDK via KMM
 
 - Port core logic to Kotlin Multiplatform `commonMain`
 - iOS `Bundle.localizedString(forKey:value:table:)` method swizzling (shipped *inside* the library, not as customer homework)
 - Swift Package Manager distribution
 - Parity with Android feature set
 
-## v0.3 — GitHub Action
+## v0.4 — Docs & launch
 
-- `polylex/extract` — parses `strings.xml` + iOS `.strings` files, emits a delta JSON of new/changed keys
-- `polylex/translate` — Google Cloud Translation v3 by default, DeepL + OpenAI as opt-in providers
-- `polylex/deploy` — uploads to your S3 bucket with timestamped versioning
-- Placeholder masking (`%1$s`, `%@`, `{var}`, HTML tags) so MT services don't corrupt format specifiers
-- RTL locale handling with bidi control characters around placeholders
-
-## v0.4 — Demo & Docs
-
-- Reference app (Jetpack Compose + SwiftUI) demonstrating end-to-end integration
-- Documentation site at docs.polylex.dev
+- docs.polylex.dev site
 - Migration guide from Lokalise / Phrase / Crowdin
-- Comparison benchmarks
+- Comparison benchmarks vs Lokalise OTA / Firebase Remote Config
+- Technical blog post series
+- Public launch (Android Weekly, Kotlin Weekly, HN, r/androiddev)
 
 ## Future (directional, not committed)
 

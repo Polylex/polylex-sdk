@@ -28,9 +28,6 @@ android {
 
     kotlinOptions {
         jvmTarget = "17"
-        freeCompilerArgs += listOf(
-            "-Xexplicit-api=strict",
-        )
     }
 
     publishing {
@@ -38,6 +35,10 @@ android {
             withSourcesJar()
         }
     }
+}
+
+kotlin {
+    explicitApi()
 }
 
 dependencies {

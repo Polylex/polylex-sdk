@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App identity (not translated) -->
+    <string name="app_name" translatable="false">PolylexDemo</string>
+
+    <!-- Onboarding -->
+    <string name="onboarding_welcome_title">Welcome to PolylexDemo</string>
+    <string name="onboarding_welcome_subtitle">Your localization, on autopilot.</string>
+    <string name="onboarding_cta_get_started">Get Started</string>
+
+    <!-- Home screen -->
+    <string name="home_greeting">Hello, %1$s</string>
+    <string name="home_messages_count">You have %1$d new messages</string>
+    <string name="home_battery_level">Battery: %1$d%%</string>
+    <string name="home_search_hint">Search…</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_emphasis">Welcome &lt;b&gt;back&lt;/b&gt;, %1$s!</string>
+    <string name="profile_subtitle">Manage your settings and preferences</string>
+
+    <!-- Actions -->
+    <string name="action_save">Save</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_edit">Edit</string>
+
+    <!-- Errors -->
+    <string name="error_generic">Something went wrong. Please try again.</string>
+    <string name="error_network">No internet connection</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_about">About</string>
+
+    <!-- About -->
+    <string name="about_version_label">Version %1$s (build %2$d)</string>
+
+    <!-- Sample-app-only UI strings (translated locally; not part of Polylex demo) -->
+    <string name="demo_status_loading" translatable="false">Loading translations…</string>
+    <string name="demo_status_active" translatable="false">Active locale: %1$s · %2$d strings loaded</string>
+    <string name="demo_status_error" translatable="false">Translation fetch failed: %1$s</string>
+    <string name="demo_pick_language" translatable="false">Pick a language</string>
+    <string name="demo_refresh" translatable="false">Refresh translations</string>
+</resources>
