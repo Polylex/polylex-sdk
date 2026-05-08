@@ -4,7 +4,11 @@
 
 Polylex is a localization runtime for mobile apps. Your CI writes a manifest + per-locale JSON files to your CDN on every release. The SDK reads the manifest on app launch, fetches the relevant translation bundle, and overrides native string resolution — so you can ship copy changes without an app release.
 
-- Auto-translate string deltas on every PR merge (via the [Polylex GitHub Action](https://github.com/polylex/polylex-action) — coming soon)
+> **Live demo:** point any Polylex SDK build at [`https://pub-6b024abd7a6c48aab35899fc3644645a.r2.dev/polylex/manifest.json`](https://pub-6b024abd7a6c48aab35899fc3644645a.r2.dev/polylex/manifest.json) — the bundles behind it are produced by the [Polylex GitHub Action](https://github.com/Polylex/polylex-action) running against this repo's [`sample/`](sample/) app on every relevant change. The same flow you'd run for your own app.
+
+<!-- TODO(v0.2): replace with docs/assets/polylex-demo.gif once recorded -->
+
+- Auto-translate string deltas on every PR merge via the [Polylex GitHub Action](https://github.com/Polylex/polylex-action)
 - Native Android + iOS SDK, zero call-site changes — your existing `getString(R.string.welcome_title)` / `NSLocalizedString("welcome_title")` just work
 - Version-aware fetching — the SDK only downloads a new bundle when the manifest version changes
 - Session-consistent, offline-safe, graceful fallback to bundled strings
@@ -12,7 +16,7 @@ Polylex is a localization runtime for mobile apps. Your CI writes a manifest + p
 
 ## Status
 
-**Pre-alpha.** Active development. Android SDK landing first, iOS (via KMM) next.
+**v0.1 pre-release.** Android SDK is functional and tested; sample Compose app at [`sample/`](sample/) builds clean and is wired to fetch from a real Cloudflare R2 CDN. iOS (via KMM) follows in v0.3. Maven Central publishing is in flight — for now, build from source.
 
 ## The manifest contract
 
@@ -53,7 +57,7 @@ The SDK fetches the manifest first, compares `version` to what it has cached, an
 
 Don't want timestamped versioning? Write a manifest with a fixed `version` (e.g., `"static"`) and a fixed `translations_base_url`. The SDK doesn't care — the contract is all that matters.
 
-## Quickstart (Android — preview)
+## Quickstart (Android)
 
 ```kotlin
 // 1. Initialize in your Application class
@@ -85,6 +89,8 @@ viewModelScope.launch {
 
 That's the full integration. Every `getString(R.string.welcome_title)` across your app now resolves against Polylex's in-memory translation cache first, falling back to your bundled `strings.xml` on any miss.
 
+Want to try it locally without setting up a CDN? See [`sample/RECORDING.md`](sample/RECORDING.md) — runs the sample app on an emulator pointed at the local-serve helper from polylex-action.
+
 ## How it works
 
 ```
@@ -93,7 +99,7 @@ That's the full integration. Every `getString(R.string.welcome_title)` across yo
                                          ▼
                          Polylex GitHub Action
                          ─ extract delta (new/changed keys only)
-                         ─ translate via Google / DeepL / OpenAI
+                         ─ translate via Gemini (default) or pluggable provider
                          ─ upload versioned bundle to your CDN
                          ─ rewrite manifest.json with new version
                                          │
