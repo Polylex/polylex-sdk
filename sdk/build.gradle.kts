@@ -2,10 +2,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlinx.serialization)
+    alias(libs.plugins.maven.publish)
 }
-
-group = project.property("polylex.group") as String
-version = project.property("polylex.version") as String
 
 android {
     namespace = "dev.polylex"
@@ -30,11 +28,6 @@ android {
         jvmTarget = "17"
     }
 
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
 }
 
 kotlin {
@@ -60,4 +53,9 @@ dependencies {
     testImplementation(libs.mockk)
 
     androidTestImplementation(libs.androidx.test.junit)
+}
+
+mavenPublishing {
+    publishToMavenCentral(automaticRelease = true)
+    signAllPublications()
 }
